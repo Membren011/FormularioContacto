@@ -6,7 +6,7 @@
 
 <h2>Contáctenos</h2>
 
-<form id="frmcontacto" method="post">
+<form id="frm-contacto" method="post">
     <div>
         <label for="nombre">Nombre</label>
         <input class="form-control" type="text" 
@@ -16,7 +16,7 @@
     <div>
         <label for="email">Email</label>
         <input class="form-control" type="email" 
-         placeholder="Ingrese su correo" required id="email" name="email"/>
+         placeholder="Ingrese su correo" required id="correo" name="correo"/>
     </div>
 
     <div>
@@ -26,66 +26,69 @@
 
     <button class="btn-primary" type="submit">Enviar información</button>
 
-    @section Scripts{
-        @{
-            await Html.RenderPartialAsync("_ValidationScriptsPartial");
-        }
-
-        <script>
-            $(function () {
-                $('#frmcontacto').validate({
-                    rules: {
-                        // nombre: "required",
-                        nombre: {
-                            required: true,
-                            maxlength: 20,
-                            minlength: 2
-                        },
-                        email: {
-                            required: true,
-                            email: true
-                        },
-                        mensaje: "required"
-                    },
-                    messages: {
-                        // nombre: "Por favor ingrese su nombre",
-                        nombre: {
-                            required: "Por favor ingrese su nombre",
-                            maxlength: jQuery.validator.format("El nombre no debe tener más de {0} caracteres."),
-                            minlength: jQuery.validator.format("El nombre debe tener al menos {0} caracteres.")
-                        },
-                        email: {
-                            required: "Por favor ingrese su correo electrónico",
-                            email: "Por favor ingrese un correo electrónico válido"
-                        },
-                        mensaje: "Por favor ingrese su mensaje"
-                    },
-                    errorClass: "is-invalid",
-                    validClass: "is-valid",
-                    errorElement: "div",
-                    errorPlacement: function (error, element) {
-                        error.addClass("invalid-feedback");
-                        error.insertAfter(element);
-                    },
-                    success: function (label, element) {
-                        $(element).addClass("is-valid");
-                        $(element).next('.invalid-feedback').remove();
-                    },
-                    highlight: function (element, errorClass, validClass) {
-                        $(element).addClass(errorClass).removeClass(validClass);
-                        $(element).next('.invalid-feedback').remove();
-                    },
-                    unhighlight: function (element, errorClass, validClass) {
-                        $(element).addClass(validClass).removeClass(errorClass);
-                        $(element).next('.invalid-feedback').remove();
-                    },
-                    submitHandler: function (form) {
-                        // Aquí puedes agregar la lógica para enviar el formulario utilizando AJAX
-                        alert('Formulario enviado exitosamente!');
-                        form.submit();
-                    }
-                });
-            });
-        </script>
-    }
 </form>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+
+    <script>
+        $(function () {
+            $('#frm-contacto').validate({
+                rules: {
+                    //nombre: "required",
+                    nombre: {
+                        required: true,
+                        maxlength: 25,
+                        minlength: 2
+                    },
+                    correo: {
+                        required: true,
+                        email: true
+                    },
+                    mensaje: "required"
+                },
+                messages: {
+                    //nombre: "Por favor ingrese su nombre",
+                    nombre: {
+                        required: "Por favor ingrese su nombre",
+                        maxlength: jQuery.validator.format("El nombre no debe contener más de {0} caracteres"),
+                        minlength: jQuery.validator.format("El nombre al menos debe contener {0} caracteres"),
+                    },
+                    correo: {
+                        required: "Por favor ingrese su correo electrónico",
+                        email: "Por favor ingrese un correo electrónico válido"
+                    },
+                    mensaje: "Por favor ingrese su mensaje"
+                },
+                errorClass: "is-invalid",
+                validClass: "is-valid",
+                errorElement: "div",
+                errorPlacement: function (error, element) {
+                    error.addClass("invalid-feedback");
+                    error.insertAfter(element);
+                },
+                success: function (label, element) {
+                    $(element).addClass("is-valid");
+                    $(element).next('.invalid-feedback').remove();
+                },
+                highlight: function (element, errorClass, validClass) {
+                    $(element).addClass(errorClass).removeClass(validClass);
+                    $(element).next('.invalid-feedback').remove();
+                },
+                unhighlight: function (element, errorClass, validClass) {
+                    $(element).addClass(validClass).removeClass(errorClass);
+                    $(element).next('.invalid-feedback').remove();
+                },
+                submitHandler: function (form) {
+                    // Aquí puedes agregar la lógica para enviar el formulario utilizando AJAX
+                    alert('Formulario enviado exitosamente!');
+                    form.submit();
+                }
+            });
+        });
+    </script>
+}
+
+
